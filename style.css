@@ -1,0 +1,68 @@
+/* Import Google fonts - Inter*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:wght@100..900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter',sans-serif;
+}
+
+body{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 100vh;
+   background: linear-gradient(#EEEEFF,#C7C8FF);
+}
+
+.chatbot{
+    width: 400px;
+    background: #EEEEFF;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 128px 0 rgba(0,0,0,0.1), /*new*/ 
+    0 32px 64px -48px rgba(0,0,0,0.5);
+}
+
+.chatbot-header{
+    display: flex;
+    align-items: center;
+    background-color: #5350C4;
+    padding: 15px 20px;
+    justify-content: space-between;
+}
+
+.chatbot-header .header-info{
+    display:flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.chatbot-header .chatbot-logo{
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    background: #EEEEFF;
+    flex-shrink: 0;
+    fill:#5350C4;
+    border-radius: 50%;
+}
+
+.chatbot-header .logo-text{
+    color: #EEEEFF;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.chatbot-header #chatbot-close{
+    width: 30px;
+    height: 30px;
+    background-color: #3d3b86;
+    border-radius: 50%;
+    color: #EEEEFF;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    padding-top:2px ;
+    margin-right: -10px;
+}
