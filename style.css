@@ -52,12 +52,12 @@ body{
     color: #EEEEFF;
     font-size: larger;
     font-weight: bolder;
+    
 }
 
 .chatbot-header #chatbot-close{
     width: 30px;
     height: 30px;
-    background-color: #3d3b86;
     border-radius: 50%;
     color: #EEEEFF;
     border: none;
@@ -65,4 +65,63 @@ body{
     font-size: large;
     padding-top:2px ;
     margin-right: -10px;
+    background: none;
+    transition: 0.2ms ease;
+}
+
+.chatbot-header #chatbot-close:hover{
+  background: #3d3b86;
+}
+
+.chatbot-body{
+    display: flex;
+    padding: 20px 18px;
+    gap : 25px;
+    height: 350px;
+    margin-bottom: 60px;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+
+.chatbot-body .bot-message{
+    display: flex;
+    gap : 10px;
+    align-items: center;
+}
+
+.chatbot-body .bot-message .chatbot-logo{
+   width: 30px;
+    height: 30px;
+    padding: 6px;
+    background: #5350C4;
+    flex-shrink: 0;
+    fill:#EEEEFF;
+    border-radius: 50%;
+}
+
+.chatbot-body .user-message{
+ padding-left: 120px;
+}
+
+.chatbot-body .message .message-text{
+   padding: 12px 16px;
+   max-width: 75%;
+   font-size: 0.95rem;
+}
+
+.chatbot-body .bot-message .message-text{
+background-color: #d9d9f6;
+border-radius: 13px 13px 13px 13px;
+}
+
+.chatbot-body .user-message .message-text{
+background-color: #595ac1;
+border-radius: 13px 13px 13px 13px;
+color: #C7C8FF;
+overflow: auto;
+}
+
+.chatbot-footer{
+    position: absolute;
 }
