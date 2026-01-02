@@ -193,7 +193,7 @@ overflow: auto;
     width: 100%;
     font-size: 0.95rem;
     padding: 2px 0px 10px 10px;
-    margin-top: 15px;
+    margin-top: 6px;
     border-radius: inherit;
     background-color: #EEEEFF;
 }
@@ -219,17 +219,18 @@ overflow: auto;
     transition: 0.2s ease;
 }
 
-.chat-form .chat-controls button:hover{
-    background: #C7C8FF;
-}
-
 .chat-form .chat-controls #send-message{
     color: #EEEEFF;
     background-color: #595ac1;
+    display: none;
 } 
 
 .chat-form .user-reply:valid~.chat-controls #send-message{
- display: block;
+   display: block;
+}
+
+.chat-form .chat-controls button:hover{
+    background: #C7C8FF;
 }
 
 .chat-form .chat-controls #send-message:hover{
