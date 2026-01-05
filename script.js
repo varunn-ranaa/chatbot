@@ -1,5 +1,5 @@
 const messageInput = document.querySelector(".user-reply");
-const chatbody = document.querySelector(".chat-body");
+const chatbody = document.querySelector(".chatbot-body");
 
 //Message element with dynamic classes
 createMessageElement = (content,classes) => {
@@ -15,7 +15,6 @@ handleOutgoingMeassage = (userMessage)=>{
     const messageContent = `<div class="message-text">${userMessage}</div>`;
     const messagediv = createMessageElement(messageContent,"user-message");
     chatbody.appendChild(messagediv);
-    
 }
 
 //Enter key to send message
