@@ -2,17 +2,46 @@ const messageInput = document.querySelector(".user-reply");
 const chatbody = document.querySelector(".chatbot-body");
 const sendMessageButton = document.querySelector("#send-message");
 
+const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
+const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+
 const userData = {
     message : null
 }
 
 //Message element with dynamic classes
-createMessageElement = (content,classes) => {
+const createMessageElement = (content,...classes) => {
     const div = document.createElement("div");
-    div.classList.add("message",classes);
+    div.classList.add("message",...classes);
     div.innerHTML = content;
     return div;
 }
+
+// const generateBotResponse = ()=>{
+ 
+// const requestOptions ={
+//   method : "POST",
+//   headers : {
+//     "Content-Type " : "application/json"
+//    },
+//    body :JSON.stringify({
+//     contents : [
+//       {
+//         parts: [
+//           {
+//             text: userData.message
+//           }
+//         ]
+//       }
+//      ] 
+// })
+// };
+//   try{
+//     const response = await fetch(API_URL, requestOptions);
+//   }catch(error){
+
+//   }
+// }
 
 //handling outgoing user messages
 handleOutgoingMeassage = (e)=>{
@@ -41,11 +70,14 @@ handleOutgoingMeassage = (e)=>{
                   <div class="dot"></div>
                </div>
             </div>`;
-    const incomingMessageDiv = createMessageElement(messageContent,"bot-message");
+    const incomingMessageDiv = createMessageElement(messageContent,"bot-message","loading-indicator");
     chatbody.appendChild(incomingMessageDiv);
-
+    // generateBotResponse();
+    chatbody.scrollTop = chatbody.scrollHeight;
     },600);
-
+  
+  //  chatbody.scrollTop = chatbody.scrollHeight - chatbody.clientHeight;  AutoScroll
+    chatbody.scrollTop = chatbody.scrollHeight;
 }
 
 //Enter key to send message

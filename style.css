@@ -116,13 +116,13 @@ body{
 
 .chatbot-body .bot-message .message-text{
 background-color: #d9d9f6;
-border-radius: 13px 13px 13px 5px;
+border-radius: 13px 13px 13px 2px;
 }
 
 .chatbot-body .user-message .message-text{
 background-color: #595ac1;
-border-radius: 13px 13px 5px 13px;
-color: #C7C8FF;
+border-radius: 13px 13px 2px 13px;
+color: #ffffff;
 overflow: auto;
 }
 
