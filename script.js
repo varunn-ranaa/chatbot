@@ -73,11 +73,18 @@ handleOutgoingMeassage = (e)=>{
     const incomingMessageDiv = createMessageElement(messageContent,"bot-message","loading-indicator");
     chatbody.appendChild(incomingMessageDiv);
     // generateBotResponse();
-    chatbody.scrollTop = chatbody.scrollHeight;
+
+    chatbody.scrollTo({
+      top: chatbody.scrollHeight,
+      behavior :'smooth'
+    });
     },600);
   
   //  chatbody.scrollTop = chatbody.scrollHeight - chatbody.clientHeight;  AutoScroll
-    chatbody.scrollTop = chatbody.scrollHeight;
+    chatbody.scrollTo({
+      top: chatbody.scrollHeight,
+      behavior :'smooth'
+    });
 }
 
 //Enter key to send message
