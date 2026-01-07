@@ -44,9 +44,13 @@ const createMessageElement = (content,...classes) => {
 // }
 
 //handling outgoing user messages
+
 handleOutgoingMeassage = (e)=>{
+  
     e.preventDefault(); //prevent form from submmitting
     userData.message = messageInput.value.trim();
+
+    if(!userData.message) return; // empty input no send  & validation for security
 
     messageInput.value = "";//clear textarea after sending input
 
@@ -72,6 +76,7 @@ handleOutgoingMeassage = (e)=>{
             </div>`;
     const incomingMessageDiv = createMessageElement(messageContent,"bot-message","loading-indicator");
     chatbody.appendChild(incomingMessageDiv);
+    
     // generateBotResponse();
 
     chatbody.scrollTo({
