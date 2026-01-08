@@ -17,31 +17,46 @@ const createMessageElement = (content,...classes) => {
     return div;
 }
 
-// const generateBotResponse = ()=>{
- 
-// const requestOptions ={
-//   method : "POST",
-//   headers : {
-//     "Content-Type " : "application/json"
-//    },
-//    body :JSON.stringify({
-//     contents : [
-//       {
-//         parts: [
-//           {
-//             text: userData.message
-//           }
-//         ]
-//       }
-//      ] 
-// })
-// };
-//   try{
-//     const response = await fetch(API_URL, requestOptions);
-//   }catch(error){
+// Generate Bot response using API
+const generateBotResponse = async (incomingMessageDiv) => {
+  const messageElement = incomingMessageDiv.querySelector(".message-text");
 
-//   }
-// }
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": API_KEY
+    },
+    body: JSON.stringify({
+      contents: [
+        {
+          parts: [
+            { text: userData.message }
+          ]
+        }
+      ]
+    })
+  };
+
+  try {
+    // Fetch bot response from API
+    const response = await fetch(API_URL, requestOptions);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error?.message || "API Error");
+    }
+
+    const botReply = data.candidates[0].content.parts[0].text.trim();
+
+    messageElement.innerText = botReply;
+
+  } catch (error) {
+    console.error("Gemini Error:", error);
+    
+  }
+};
+
 
 //handling outgoing user messages
 
@@ -77,7 +92,7 @@ handleOutgoingMeassage = (e)=>{
     const incomingMessageDiv = createMessageElement(messageContent,"bot-message","loading-indicator");
     chatbody.appendChild(incomingMessageDiv);
     
-    // generateBotResponse();
+    generateBotResponse(incomingMessageDiv);
 
     chatbody.scrollTo({
       top: chatbody.scrollHeight,
