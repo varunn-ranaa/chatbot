@@ -47,14 +47,19 @@ const generateBotResponse = async (incomingMessageDiv) => {
       throw new Error(data.error?.message || "API Error");
     }
 
-    const botReply = data.candidates[0].content.parts[0].text.trim();
+    const botReply = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
 
     messageElement.innerText = botReply;
 
   } catch (error) {
+    messageElement.innerText = error.message;
+    messageElement.style.color = "red";
     console.error("Gemini Error:", error);
     
+  }finally{
+    incomingMessageDiv.classList.remove("loading-indicator");
   }
+
 };
 
 
@@ -68,6 +73,8 @@ handleOutgoingMeassage = (e)=>{
     if(!userData.message) return; // empty input no send  & validation for security
 
     messageInput.value = "";//clear textarea after sending input
+
+    sendMessageButton.disable = true;
 
     //create and display user message
     const messageContent = `<div class="message-text">${userData.message}</div>`;
@@ -101,7 +108,7 @@ handleOutgoingMeassage = (e)=>{
     },600);
   
   //  chatbody.scrollTop = chatbody.scrollHeight - chatbody.clientHeight;  AutoScroll
-    chatbody.scrollTo({
+      chatbody.scrollTo({
       top: chatbody.scrollHeight,
       behavior :'smooth'
     });
