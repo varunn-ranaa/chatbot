@@ -82,6 +82,8 @@ body{
     margin-bottom: 60px;
     flex-direction: column;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ccccf5 transparent;
 }
 
 
