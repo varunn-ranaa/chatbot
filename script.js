@@ -1,6 +1,7 @@
 const messageInput = document.querySelector(".user-reply");
 const chatbody = document.querySelector(".chatbot-body");
 const sendMessageButton = document.querySelector("#send-message");
+const fileInput = document.querySelector("#file-input");
 
 const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
 const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
@@ -55,7 +56,6 @@ const generateBotResponse = async (incomingMessageDiv) => {
     messageElement.innerText = error.message;
     messageElement.style.color = "red";
     console.error("Gemini Error:", error);
-    
   }finally{
     incomingMessageDiv.classList.remove("loading-indicator");
   }
@@ -123,3 +123,4 @@ messageInput.addEventListener("keydown" , (e)=>{
 });
 
 sendMessageButton.addEventListener("click",(e) => handleOutgoingMeassage(e));
+document.querySelector("#file-upload").addEventListener("click",()=>{fileInput.click()});
