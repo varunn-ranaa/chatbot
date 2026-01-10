@@ -55,7 +55,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
   } catch (error) {
     messageElement.innerText = error.message;
     messageElement.style.color = "red";
-    console.error("Gemini Error:", error);
+    console.error("Error:", error);
   }finally{
     incomingMessageDiv.classList.remove("loading-indicator");
   }
@@ -64,7 +64,6 @@ const generateBotResponse = async (incomingMessageDiv) => {
 
 
 //handling outgoing user messages
-
 handleOutgoingMeassage = (e)=>{
   
     e.preventDefault(); //prevent form from submmitting
@@ -120,6 +119,13 @@ messageInput.addEventListener("keydown" , (e)=>{
    if(e.key=='Enter' && userMessage){
     handleOutgoingMeassage(e);
    }
+});
+
+//attach File
+fileInput.addEventListener("change",(e)=>{
+   const file = fileInput.files[0];
+   if(!file) return;
+   console.log(file.name);
 });
 
 sendMessageButton.addEventListener("click",(e) => handleOutgoingMeassage(e));
