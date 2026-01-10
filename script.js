@@ -121,11 +121,23 @@ messageInput.addEventListener("keydown" , (e)=>{
    }
 });
 
-//attach File
+//Attach File
 fileInput.addEventListener("change",(e)=>{
    const file = fileInput.files[0];
    if(!file) return;
+
+   let fileDate = new Date(file.lastModified);
    console.log(file.name);
+   console.log(fileDate.toLocaleDateString());
+   console.log(file.lastModifiedDate);
+   console.log(file.size < 1000 ? file.size : `${Math.round(file.size/1000)}KB`);
+   console.log(file.type);//MIME
+   //convert file into Base64(binary to text encoding) 
+   const reader = new FileReader();
+   reader.onload = (e)=>{
+     console.log(e.target.result);
+   }
+   reader.readAsDataURL(file);
 });
 
 sendMessageButton.addEventListener("click",(e) => handleOutgoingMeassage(e));
