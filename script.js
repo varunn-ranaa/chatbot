@@ -7,7 +7,11 @@ const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
 const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const userData = {
-    message : null
+    message : null,
+    file : {
+      data : null,
+      mime_type : null
+    }
 }
 
 //Message element with dynamic classes
@@ -32,7 +36,8 @@ const generateBotResponse = async (incomingMessageDiv) => {
       contents: [
         {
           parts: [
-            { text: userData.message }
+            { text: userData.message },
+            ...(userData.file.data ? [{inline_data: userData.file}] : [])
           ]
         }
       ]
@@ -132,10 +137,17 @@ fileInput.addEventListener("change",(e)=>{
    console.log(file.lastModifiedDate);
    console.log(file.size < 1000 ? file.size : `${Math.round(file.size/1000)}KB`);
    console.log(file.type);//MIME
+   
    //convert file into Base64(binary to text encoding) 
    const reader = new FileReader();
    reader.onload = (e)=>{
-     console.log(e.target.result);
+     const base64string = e.target.result.split(",")[1];
+     userData.file = {
+      data : base64string,
+      mime_type : file.type
+     }
+     console.log(e.target.result.split(","));
+     fileInput.value = "";
    }
    reader.readAsDataURL(file);
 });
