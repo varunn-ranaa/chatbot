@@ -128,6 +128,13 @@ color: #ffffff;
 overflow: auto;
 }
 
+.chatbot-body .user-message .attachment{
+  margin-top: 7px;
+  width: 50%;
+  border-radius: 13px 2px 13px 13px;
+  
+}
+
 .chatbot-body .bot-message .loading-indicator{
  display: flex;
  gap:4px;
