@@ -62,6 +62,8 @@ const generateBotResponse = async (incomingMessageDiv) => {
     messageElement.style.color = "red";
     console.error("Error:", error);
   }finally{
+    //reset user's file data , remove bot loading-indicator
+    userData.file = {};
     incomingMessageDiv.classList.remove("loading-indicator");
   }
 
@@ -140,14 +142,16 @@ fileInput.addEventListener("change",(e)=>{
    
    //convert file into Base64(binary to text encoding) 
    const reader = new FileReader();
+
    reader.onload = (e)=>{
      const base64string = e.target.result.split(",")[1];
+     //store data in UserData
      userData.file = {
       data : base64string,
       mime_type : file.type
-     }
-     console.log(e.target.result.split(","));
+     };
      fileInput.value = "";
+     console.log(e.target.result.split(","));
    }
    reader.readAsDataURL(file);
 });
