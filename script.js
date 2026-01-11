@@ -82,6 +82,8 @@ handleOutgoingMeassage = (e)=>{
 
     messageInput.value = "";//clear textarea after sending input
 
+    fileUploader.classList.remove("file-uploaded");
+
     sendMessageButton.disable = true;
 
     //create and display user message
