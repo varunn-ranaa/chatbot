@@ -3,6 +3,7 @@ const chatbody = document.querySelector(".chatbot-body");
 const sendMessageButton = document.querySelector("#send-message");
 const fileInput = document.querySelector("#file-input");
 const fileUploader = document.querySelector(".file-uploader");
+const fileCancelButtom = document.querySelector("#file-cancel");
 
 const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
 const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
@@ -162,6 +163,12 @@ fileInput.addEventListener("change",(e)=>{
      console.log(e.target.result.split(","));
    }
    reader.readAsDataURL(file);
+});
+
+fileCancelButtom.addEventListener("click",()=>{
+  userData.file = {};
+  fileUploader.classList.remove("file-uploaded");
+
 });
 
 sendMessageButton.addEventListener("click",(e) => handleOutgoingMeassage(e));

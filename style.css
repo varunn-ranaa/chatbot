@@ -251,9 +251,11 @@ overflow: auto;
     width: 30px;
     position: relative;
 }
+.chat-form .file-uploader :where(img,button){
+  position :absolute; 
+}
 
 .chat-form .file-uploader img{
-    position :absolute; 
     height:30px;
     width: 30px;
     border-radius: 50%;
@@ -261,7 +263,18 @@ overflow: auto;
     display:none;
 }
 
-.chat-form .file-uploader.file-uploaded img{
+.chat-form .file-uploader #file-cancel{
+    color: #595ac1;
+    background-color:  transparent;
+}
+
+ .chat-form .file-uploader :where(img,#file-cancel),
+ .chat-form .file-uploader.file-uploaded #file-upload{
+   display: none;
+ }
+
+.chat-form .file-uploader.file-uploaded img,
+.chat-form .file-uploader.file-uploaded:hover #file-cancel{
     display: block;
 }
 
