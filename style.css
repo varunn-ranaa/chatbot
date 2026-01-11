@@ -246,4 +246,22 @@ overflow: auto;
     background:#3d3b86
 }
 
+.chat-form .file-uploader{
+    height: 30px;
+    width: 60px;
+    display: flex;
+    gap: 1px;
+    align-items: center;
+}
 
+.chat-form .file-uploader img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: fill;
+    /* display: none; */
+}
+
+.chat-form .file-uploader .file-upload img{
+    /* display: block; */
+}

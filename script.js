@@ -2,6 +2,7 @@ const messageInput = document.querySelector(".user-reply");
 const chatbody = document.querySelector(".chatbot-body");
 const sendMessageButton = document.querySelector("#send-message");
 const fileInput = document.querySelector("#file-input");
+const fileUploader = document.querySelector(".file-uploader");
 
 const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
 const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
@@ -147,6 +148,9 @@ fileInput.addEventListener("change",(e)=>{
    const reader = new FileReader();
 
    reader.onload = (e)=>{
+     fileUploader.querySelector("img").src = e.target.result;
+     fileUploader.classList.add("file-upload");
+
      const base64string = e.target.result.split(",")[1];
      //store data in UserData
      userData.file = {
