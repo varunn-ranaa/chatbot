@@ -248,20 +248,20 @@ overflow: auto;
 
 .chat-form .file-uploader{
     height: 30px;
-    width: 60px;
-    display: flex;
-    gap: 1px;
-    align-items: center;
+    width: 30px;
+    position: relative;
 }
 
 .chat-form .file-uploader img{
-    height: 30px;
+    position :absolute; 
+    height:30px;
     width: 30px;
     border-radius: 50%;
     object-fit: fill;
-    /* display: none; */
+    display:none;
 }
 
-.chat-form .file-uploader .file-upload img{
-    /* display: block; */
+.chat-form .file-uploader.file-uploaded img{
+    display: block;
 }
+

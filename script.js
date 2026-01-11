@@ -148,8 +148,9 @@ fileInput.addEventListener("change",(e)=>{
    const reader = new FileReader();
 
    reader.onload = (e)=>{
+
      fileUploader.querySelector("img").src = e.target.result;
-     fileUploader.classList.add("file-upload");
+     fileUploader.classList.add("file-uploaded");
 
      const base64string = e.target.result.split(",")[1];
      //store data in UserData
