@@ -170,8 +170,17 @@ fileInput.addEventListener("change",(e)=>{
 fileCancelButtom.addEventListener("click",()=>{
   userData.file = {};
   fileUploader.classList.remove("file-uploaded");
-
 });
+
+//emoji picker --
+const picker = new EmojiMart.Picker({
+  // onEmojiSelect: console.log,
+  theme : "light",
+  previewPosition : "none",
+  skinTonePosition : "none"
+});
+
+document.querySelector(".chat-form").appendChild(picker);
 
 sendMessageButton.addEventListener("click",(e) => handleOutgoingMeassage(e));
 document.querySelector("#file-upload").addEventListener("click",()=>{fileInput.click()});

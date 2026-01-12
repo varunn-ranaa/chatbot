@@ -185,6 +185,7 @@ overflow: auto;
 .chatbot-footer .chat-form{
     width: 375px;
     display: flex;
+    position: relative;
     align-items: center;
     background-color: #EEEEFF;
     border-radius: 22px;
@@ -213,7 +214,7 @@ overflow: auto;
     align-self: flex-end;
     height:50px ;
     padding-right: 6px;
-    gap:2px
+    gap:2px;
 }
 
 .chat-form .chat-controls button{
@@ -252,7 +253,7 @@ overflow: auto;
     position: relative;
 }
 .chat-form .file-uploader :where(img,button){
-  position :absolute; 
+   position :absolute; 
 }
 
 .chat-form .file-uploader img{
@@ -260,7 +261,6 @@ overflow: auto;
     width: 30px;
     border-radius: 50%;
     object-fit: fill;
-    display:none;
 }
 
 .chat-form .file-uploader #file-cancel{
@@ -278,3 +278,12 @@ overflow: auto;
     display: block;
 }
 
+em-emoji-picker{
+    position: absolute;
+    width: 100%;
+    max-height: 300px;
+    max-width: 340px;
+    transform: translateY(-60%);
+    left:20px;
+    visibility: hidden;
+}
