@@ -287,3 +287,7 @@ em-emoji-picker{
     left:20px;
     visibility: hidden;
 }
+
+body.show-emoji-picker em-emoji-picker{
+    visibility: visible;
+}

@@ -177,10 +177,19 @@ const picker = new EmojiMart.Picker({
   // onEmojiSelect: console.log,
   theme : "light",
   previewPosition : "none",
-  skinTonePosition : "none"
+  skinTonePosition : "none",
+  emojiButtonColors: "#C7C8FF",
+  onClickOutside: (e)=>{
+    if(e.target.id === "emoji"){
+      document.body.classList.toggle("show-emoji-picker");
+    }else{
+      document.body.classList.remove("show-emoji-picker");
+    }
+  }
 });
 
 document.querySelector(".chat-form").appendChild(picker);
+
 
 sendMessageButton.addEventListener("click",(e) => handleOutgoingMeassage(e));
 document.querySelector("#file-upload").addEventListener("click",()=>{fileInput.click()});
