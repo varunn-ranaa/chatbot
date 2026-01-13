@@ -187,7 +187,9 @@ const picker = new EmojiMart.Picker({
     }
   },
   onEmojiSelect : (emoji)=>{
-  const {selectionStart: start, selectionEnd: end} = messageInput;
+  // const {selectionStart: start, selectionEnd: end} = messageInput;
+  const start = messageInput.selectionStart;
+  const end   = messageInput.selectionEnd;
   messageInput.setRangeText(emoji.native,start,end,"end");
   messageInput.focus();
   }
