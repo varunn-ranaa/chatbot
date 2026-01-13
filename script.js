@@ -185,6 +185,11 @@ const picker = new EmojiMart.Picker({
     }else{
       document.body.classList.remove("show-emoji-picker");
     }
+  },
+  onEmojiSelect : (emoji)=>{
+  const {selectionStart: start, selectionEnd: end} = messageInput;
+  messageInput.setRangeText(emoji.native,start,end,"end");
+  messageInput.focus();
   }
 });
 
