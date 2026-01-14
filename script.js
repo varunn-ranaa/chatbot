@@ -16,6 +16,8 @@ const userData = {
     }
 }
 
+ chatHistory = []; 
+
 //Message element with dynamic classes
 const createMessageElement = (content,...classes) => {
     const div = document.createElement("div");
@@ -27,6 +29,15 @@ const createMessageElement = (content,...classes) => {
 // Generate Bot response using API
 const generateBotResponse = async (incomingMessageDiv) => {
   const messageElement = incomingMessageDiv.querySelector(".message-text");
+   
+  //Add bot reply to chat history
+  chatHistory.push({
+          role : "user",
+          parts: [
+            { text: userData.message },
+            ...(userData.file.data ? [{inline_data: userData.file}] : [])
+          ]
+        });
 
   const requestOptions = {
     method: "POST",
@@ -35,14 +46,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
       "x-goog-api-key": API_KEY
     },
     body: JSON.stringify({
-      contents: [
-        {
-          parts: [
-            { text: userData.message },
-            ...(userData.file.data ? [{inline_data: userData.file}] : [])
-          ]
-        }
-      ]
+      contents: chatHistory
     })
   };
 
@@ -58,6 +62,12 @@ const generateBotResponse = async (incomingMessageDiv) => {
     const botReply = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
 
     messageElement.innerText = botReply;
+
+    //Add bot reply to chat history
+    chatHistory.push({  
+          role : "model",
+          parts: [{ text: userData.message }]
+        })
 
   } catch (error) {
     messageElement.innerText = error.message;
