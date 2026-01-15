@@ -5,8 +5,10 @@ const fileInput = document.querySelector("#file-input");
 const fileUploader = document.querySelector(".file-uploader");
 const fileCancelButtom = document.querySelector("#file-cancel");
 
+
 const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
 const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+const joke_url=` https://icanhazdadjoke.com/`;
 
 const userData = {
     message : null,
@@ -38,6 +40,11 @@ const generateBotResponse = async (incomingMessageDiv) => {
             ...(userData.file.data ? [{inline_data: userData.file}] : [])
           ]
         });
+  
+  if (chatHistory.length > 6) {
+     chatHistory = chatHistory.slice(-6);
+  }
+
 
   const requestOptions = {
     method: "POST",
@@ -52,6 +59,27 @@ const generateBotResponse = async (incomingMessageDiv) => {
 
   try {
     // Fetch bot response from API
+    if(userData.message.toLowerCase().includes("joke")){  // adding public apis
+       const res = await fetch(joke_url,{
+        headers : { Accept : "application/json" }});
+       const data = await res.json();
+
+      const botReply = data.joke;
+
+      messageElement.innerText = botReply;
+
+      chatHistory.push({
+       role: "model",
+       parts: [{ text: botReply }]
+      });
+
+    if (chatHistory.length > 6) {
+      chatHistory = chatHistory.slice(-6);
+     }
+
+      return ;
+    }
+
     const response = await fetch(API_URL, requestOptions);
     const data = await response.json();
 
@@ -59,15 +87,19 @@ const generateBotResponse = async (incomingMessageDiv) => {
       throw new Error(data.error?.message || "API Error");
     }
 
-    const botReply = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
+    const botReply = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim() || "NO Data form Modal";
 
     messageElement.innerText = botReply;
 
     //Add bot reply to chat history
     chatHistory.push({  
           role : "model",
-          parts: [{ text: userData.message }]
+          parts: [{ text: botReply }]
         })
+
+   if (chatHistory.length > 6) {
+     chatHistory = chatHistory.slice(-6);
+     }
 
   } catch (error) {
     messageElement.innerText = error.message;
