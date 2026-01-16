@@ -291,3 +291,13 @@ em-emoji-picker{
 body.show-emoji-picker em-emoji-picker{
     visibility: visible;
 }
+
+/*Responsive layout*/
+
+@media (max-width: 600px) {
+  .chatbot {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
