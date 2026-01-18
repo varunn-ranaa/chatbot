@@ -9,6 +9,7 @@ const fileCancelButtom = document.querySelector("#file-cancel");
 const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
 const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 const joke_url=` https://icanhazdadjoke.com/`;
+const facts_url =`https://uselessfacts.jsph.pl/api/v2/facts/random?language=en`;
 
 const userData = {
     message : null,
@@ -78,6 +79,30 @@ const generateBotResponse = async (incomingMessageDiv) => {
      }
 
       return ;
+    }
+
+    else if(userData.message.toLowerCase().includes("fact")){
+        
+      const res = await fetch(facts_url,{
+        headers : { Accept : "application/json"}
+      });
+
+      const data = await res.json();
+
+       let botReply = data.text;
+      
+       messageElement.innerText = botReply;
+
+       chatHistory.push({
+        role : "model",
+        parts : [{ text : botReply}]
+       });
+
+       if(chatHistory.length > 6){
+        chatHistory = chatHistory.slice(-6);
+       }
+    
+       return;
     }
 
     const response = await fetch(API_URL, requestOptions);
