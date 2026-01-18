@@ -141,6 +141,11 @@ overflow: auto;
  padding-block: 2px;
 }
 
+ .bot-message .chat-img{
+  width: 100%;
+  border-radius: 13px;
+}
+
 .chatbot-body .bot-message .loading-indicator .dot{
     height: 7px;
     width: 7px;

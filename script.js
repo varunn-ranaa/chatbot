@@ -10,6 +10,7 @@ const API_KEY= `AIzaSyDW_QskOcV96AsGodmt_InOg-snGPCfc6I`;
 const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 const joke_url=` https://icanhazdadjoke.com/`;
 const facts_url =`https://uselessfacts.jsph.pl/api/v2/facts/random?language=en`;
+const dogImg_url =`https://dog.ceo/api/breeds/image/random`;
 
 const userData = {
     message : null,
@@ -58,9 +59,9 @@ const generateBotResponse = async (incomingMessageDiv) => {
     })
   };
 
-  try {
+  try {// adding public apis
     // Fetch bot response from API
-    if(userData.message.toLowerCase().includes("joke")){  // adding public apis
+    if(userData.message.toLowerCase().includes("joke")){  //Joke api call
        const res = await fetch(joke_url,{
         headers : { Accept : "application/json" }});
        const data = await res.json();
@@ -81,7 +82,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
       return ;
     }
 
-    else if(userData.message.toLowerCase().includes("fact")){
+    else if(userData.message.toLowerCase().includes("fact")){   //Random Fact API call
         
       const res = await fetch(facts_url,{
         headers : { Accept : "application/json"}
@@ -104,6 +105,29 @@ const generateBotResponse = async (incomingMessageDiv) => {
     
        return;
     }
+
+    else if(userData.message.toLowerCase().includes("dog image")){   //Dog Img API call
+        
+      const res = await fetch(dogImg_url)
+
+      const data = await res.json();
+      
+       messageElement.innerHTML = `<img src="${data.message}" alt="Dog" class="chat-img" >`;
+
+       let botReply = "🐶 Here is a cute dog for you!";
+
+       chatHistory.push({
+        role : "model",
+        parts : [{ text : botReply}]
+       });
+
+       if(chatHistory.length > 6){
+        chatHistory = chatHistory.slice(-6);
+       }
+    
+       return;
+    }
+
 
     const response = await fetch(API_URL, requestOptions);
     const data = await response.json();
