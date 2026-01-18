@@ -300,4 +300,14 @@ body.show-emoji-picker em-emoji-picker{
     height: 100vh;
     border-radius: 0;
   }
+   
+   .chatbot-footer .chat-form{
+    width: 100%;
+  }
+
+  .chat-form{
+   transform: translateX(-9px);
+  }
+
+
 }
