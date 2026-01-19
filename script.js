@@ -11,6 +11,7 @@ const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2
 const joke_url=` https://icanhazdadjoke.com/`;
 const facts_url =`https://uselessfacts.jsph.pl/api/v2/facts/random?language=en`;
 const dogImg_url =`https://dog.ceo/api/breeds/image/random`;
+const catImage_url=`https://api.thecatapi.com/v1/images/search`;
 
 const userData = {
     message : null,
@@ -111,14 +112,12 @@ const generateBotResponse = async (incomingMessageDiv) => {
       const res = await fetch(dogImg_url)
 
       const data = await res.json();
-      
+      console.log(data.message);
        messageElement.innerHTML = `<img src="${data.message}" alt="Dog" class="chat-img" >`;
-
-       let botReply = "🐶 Here is a cute dog for you!";
 
        chatHistory.push({
         role : "model",
-        parts : [{ text : botReply}]
+        parts : [{ text : data.message}]
        });
 
        if(chatHistory.length > 6){
@@ -128,6 +127,26 @@ const generateBotResponse = async (incomingMessageDiv) => {
        return;
     }
 
+    else if(userData.message.toLowerCase().includes("cat image")){    // cat image api
+     
+        const res =   await fetch(catImage_url);
+
+        const data = await res.json();
+        console.log(data[0]);
+
+        messageElement.innerHTML = `<img src="${data[0].url}" alt="cat" class="chat-img">`;
+
+        chatHistory.push({
+          role : "model",
+          parts : [{text : data[0].url}]
+        });
+
+        if(chatHistory.length > 6){
+          chatHistory = chatHistory.slice(-6);
+        }
+        
+        return;
+    }
 
     const response = await fetch(API_URL, requestOptions);
     const data = await response.json();

@@ -94,7 +94,7 @@ body{
 }
 
 .chatbot-body .bot-message .chatbot-logo{
-   width: 30px;
+    width: 30px;
     height: 30px;
     padding: 6px;
     background: #5350C4;
